@@ -1,0 +1,8 @@
+
+.input-button-group {
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+    gap: 10px; 
+}
+

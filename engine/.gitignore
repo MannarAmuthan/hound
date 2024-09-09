@@ -1,0 +1,6 @@
+.venv
+data
+build
+engine
+dist
+__pycache__/
