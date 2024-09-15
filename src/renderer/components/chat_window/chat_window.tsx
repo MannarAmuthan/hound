@@ -1,14 +1,26 @@
 import React, { useState } from 'react';
 import { Button, Input , Typography} from 'antd';
+import { GlobalContext } from '../../AppState';
+
 
 const { TextArea } = Input;
 const { Title } = Typography;
 
 const ChatWindow: React.FC = () => {
 
-    const [content, setContent] =  useState("");
-    const [query, setQuery] =  useState("");
-    const [isLoading, setIsLoading] = useState(false);
+
+    const { chatWindowcontent, 
+        setChatWindowcontent, 
+        chatWindowquery, 
+        setChatWindowquery, 
+        chatWindowisLoading, 
+        setChatWindowisLoading} : any = React.useContext(GlobalContext);
+
+
+
+    const [content, setContent] = [chatWindowcontent, setChatWindowcontent]
+    const [query, setQuery] =  [chatWindowquery, setChatWindowquery]
+    const [isLoading, setIsLoading] = [chatWindowisLoading, setChatWindowisLoading]
 
 
     function constructComponent(item){

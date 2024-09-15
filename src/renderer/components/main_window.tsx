@@ -9,6 +9,7 @@ import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import TextWindow from './text_window/text_window';
 import RetrieveWindow from './retrieve_window/retrieve_window';
 import ChatWindow from './chat_window/chat_window';
+import { GlobalContext } from '../AppState';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -38,6 +39,21 @@ const items: MenuItem[] = [
 ];
 
 const MainWindow: React.FC = () => {
+
+  const [retreiveWindowcontent, setRetreiveWindowcontent] =  useState("");
+  const [retreiveWindowquery, setRetreiveWindowquery] =  useState("");
+  const [retreiveWindowisLoading, setRetreiveWindowisLoading] = useState(false);
+
+  const [textWindowcontent, setTextWindowcontent] =  useState("");
+  const [textWindowcontentIsDumping, setTextWindowcontentIsDumping] = useState(false);
+  const [textWindowContentsProcessed, setTextWindowContentsProcessed] = useState(0);
+  const [textWindowUrlsProcessed, setTextWindowUrlsProcessed] = useState(0);
+
+  const [chatWindowcontent, setChatWindowcontent] =  useState("");
+  const [chatWindowquery, setChatWindowquery] =  useState("");
+  const [chatWindowisLoading, setChatWindowisLoading] = useState(false);
+
+
   const [collapsed, setCollapsed] = useState(false);
   const [current, setCurrent] = useState("0");
   const [currentWindow, setCurrentWindow] = useState(<TextWindow/>);
@@ -59,6 +75,31 @@ const MainWindow: React.FC = () => {
     }
   }
 
+  const globalState = { 
+     retreiveWindowcontent: retreiveWindowcontent, 
+     setRetreiveWindowcontent: setRetreiveWindowcontent , 
+     retreiveWindowquery:retreiveWindowquery ,
+     setRetreiveWindowquery:setRetreiveWindowquery,
+     retreiveWindowisLoading:retreiveWindowisLoading, 
+     setRetreiveWindowisLoading:setRetreiveWindowisLoading,
+
+     textWindowcontent: textWindowcontent,
+     setTextWindowcontent: setTextWindowcontent,
+     textWindowcontentIsDumping:textWindowcontentIsDumping,
+     setTextWindowcontentIsDumping:setTextWindowcontentIsDumping,
+     textWindowContentsProcessed:textWindowContentsProcessed,
+     setTextWindowContentsProcessed:setTextWindowContentsProcessed,
+     textWindowUrlsProcessed:textWindowUrlsProcessed,
+     setTextWindowUrlsProcessed:setTextWindowUrlsProcessed,
+
+     chatWindowcontent:chatWindowcontent,
+     setChatWindowcontent:setChatWindowcontent,
+     chatWindowquery:chatWindowquery,
+     setChatWindowquery:setChatWindowquery,
+     chatWindowisLoading:chatWindowisLoading,
+     setChatWindowisLoading:setChatWindowisLoading
+    }
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
@@ -71,9 +112,12 @@ const MainWindow: React.FC = () => {
             }/>
       </Sider>
       <Layout>
-        <Content style={{ margin: '0 16px' }}>
-          {currentWindow}
-        </Content>
+        <GlobalContext.Provider 
+          value={globalState}>
+          <Content style={{ margin: '0 16px' }}>
+            {currentWindow}
+          </Content>
+        </GlobalContext.Provider>
         <Footer style={{ textAlign: 'center' }}>
           Footer
         </Footer>

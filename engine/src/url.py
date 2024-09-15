@@ -24,7 +24,9 @@ def status():
 def insert(urls: List[str]):
   inserted_urls = []
   for url in urls:
+    url = url.strip()
     response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
+    print(f"Response: {response.status_code}, url: {url}")
     if response.ok:
       soup = bs4.BeautifulSoup(response.text, 'lxml')
 
@@ -63,7 +65,7 @@ def insert(urls: List[str]):
       except Exception as e:
         print(e)
 
-      return inserted_urls
+  return inserted_urls
 
 
 def query(texts: List[str],

@@ -1,14 +1,24 @@
 import React, { useState } from 'react';
 import { Button, Input , Typography} from 'antd';
+import { GlobalContext } from '../../AppState';
 
 const { TextArea } = Input;
 const { Title } = Typography;
 
 const RetrieveWindow: React.FC = () => {
 
-    const [content, setContent] =  useState("");
-    const [query, setQuery] =  useState("");
-    const [isLoading, setIsLoading] = useState(false);
+
+    const { retreiveWindowcontent, 
+            setRetreiveWindowcontent, 
+            retreiveWindowquery, 
+            setRetreiveWindowquery, 
+            retreiveWindowisLoading, 
+            setRetreiveWindowisLoading} : any = React.useContext(GlobalContext);
+
+
+    const [content, setContent] =  [retreiveWindowcontent, setRetreiveWindowcontent]
+    const [query, setQuery] =  [retreiveWindowquery, setRetreiveWindowquery]
+    const [isLoading, setIsLoading] = [retreiveWindowisLoading, setRetreiveWindowisLoading ]
 
 
     function constructComponent(item){

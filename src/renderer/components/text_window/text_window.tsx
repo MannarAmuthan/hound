@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Input , Typography} from 'antd';
 import './text_window.css'
+import { GlobalContext } from '../../AppState';
 
 const { TextArea } = Input;
 const { Title } = Typography;
 
 const TextWindow: React.FC = () => {
 
-    const [content, setContent] =  useState("");
-    const [isDumping, setIsDumping] = useState(false);
+    const { 
+        textWindowcontent, 
+        setTextWindowcontent, 
+        textWindowcontentIsDumping, 
+        setTextWindowcontentIsDumping, 
+        textWindowContentsProcessed, 
+        setTextWindowContentsProcessed,
+        textWindowUrlsProcessed,
+        setTextWindowUrlsProcessed
+    } : any = React.useContext(GlobalContext);
 
-    const [contentsProcessed, setContentsProcessed] = useState(0);
-    const [urlsProcessed, setUrlProcessed] = useState(0);
+
+    const [content, setContent] =  [textWindowcontent, setTextWindowcontent]
+    const [isDumping, setIsDumping] = [textWindowcontentIsDumping, setTextWindowcontentIsDumping ]
+    const [contentsProcessed, setContentsProcessed] = [textWindowContentsProcessed, setTextWindowContentsProcessed]
+    const [urlsProcessed, setUrlProcessed] = [textWindowUrlsProcessed, setTextWindowUrlsProcessed]
 
 
     async function fetchStatus() {
